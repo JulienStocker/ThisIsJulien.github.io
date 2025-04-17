@@ -1680,68 +1680,48 @@ textarea.form-input::-webkit-resizer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  /* Space between images */
+  gap: 25px;
+  background: var(--border-gradient-onyx);
+  padding: 25px;
+  border-radius: 14px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Make images responsive */
+.coding-languages-container::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: var(--bg-gradient-jet);
+  border-radius: inherit;
+  z-index: -1;
+}
+
 .coding-languages-container img {
-  max-width: 45%;
-  /* Each image can take up to 45% of container width */
-  height: auto;
+  height: 200px;
+  width: auto;
+  max-width: 48%;
+  object-fit: contain;
+  transition: var(--transition-1);
+  filter: drop-shadow(var(--shadow-1));
 }
 
-/* On smaller screens, stack images vertically and widen them */
 @media (max-width: 600px) {
   .coding-languages-container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    padding: 20px;
   }
 
   .coding-languages-container img {
     max-width: 100%;
-    /* Images now full width of container */
-    margin-bottom: 20px;
-    /* Space between stacked images */
-  }
-}
-
-.coding-languages {
-  margin-bottom: 30px;
-}
-
-.coding-languages .h3 {
-  margin-bottom: 20px;
-}
-
-
-.coding-languages-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
-
-/* Force both images to have the same height, adapt width proportionally */
-.coding-languages-container img {
-  height: 200px;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-  /* Ensures the image maintains aspect ratio */
-}
-
-/* On smaller screens, stack the images vertically and still keep the same height */
-@media (max-width: 600px) {
-  .coding-languages-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  /* You can optionally reduce height a bit on mobile if needed */
-  /* .coding-languages-container img {
     height: 180px;
-  } */
+    margin-bottom: 20px;
+  }
+
+  .coding-languages-container img:last-child {
+    margin-bottom: 0;
+  }
 }
 
 
