@@ -129,9 +129,9 @@
   /* src: url('../fonts/suisse-intl/SuisseIntl-RegularItalic.ttf') format('truetype'); */
   /* src: url('../fonts/suisse-intl/SuisseIntl-SemiBold.ttf') format('truetype'); */
   /* src: url('../fonts/suisse-intl/SuisseIntl-SemiBoldItalic.ttf') format('truetype'); */
-  /* src: url('../fonts/suisse-intl/SuisseIntl-Thin.ttf') format('truetype'); */
+  src: url('../fonts/suisse-intl/SuisseIntl-Thin.ttf') format('truetype');
   /* src: url('../fonts/suisse-intl/SuisseIntl-ThinItalic.ttf') format('truetype'); */
-  src: url('../fonts/suisse-intl/SuisseIntl-Ultralight.ttf') format('truetype');
+  /* src: url('../fonts/suisse-intl/SuisseIntl-Ultralight.ttf') format('truetype'); */
 
   /* src: url('../fonts/suisse-intl/SuisseIntl-UltralightItalic.ttf') format('truetype'); */
 

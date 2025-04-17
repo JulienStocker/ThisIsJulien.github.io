@@ -4,6 +4,8 @@ ssh-add -l
 ssh -T git@github.com
 
 
+git push origin development:gh-pages
+
 gitquick "deleted highschool education"
 
 Huggin face key
