@@ -1131,10 +1131,25 @@
           <h2 class="h2 article-title">Blog</h2>
         </header>
 
+        <ul class="filter-list">
+          <li class="filter-item">
+            <button class="active" data-filter-btn>All</button>
+          </li>
+          <li class="filter-item">
+            <button data-filter-btn>Finance</button>
+          </li>
+          <li class="filter-item">
+            <button data-filter-btn>Robotics</button>
+          </li>
+          <li class="filter-item">
+            <button data-filter-btn>Environmental Monitoring</button>
+          </li>
+        </ul>
+
         <section class="blog-posts">
           <ul class="blog-posts-list">
 
-            <li class="blog-post-item">
+            <li class="blog-post-item" data-filter-item data-category="finance">
               <a
                 href="https://medium.com/@stockerjulien/swiss-robotic-day-2024-a-reflection-on-innovation-and-entrepreneurship-b9a7177c296d">
 
@@ -1153,7 +1168,7 @@
                   </div>
 
                   <h3 class="h3 blog-item-title">The Fallible Mind: Why Trusting Robots Might Be Easier Than
-                    Trusting Yourself</h3>
+                    Trusting Yourself</h3>
 
                   <p class="blog-text">
                     Humans' reliance on cognitive shortcuts like heuristics and loss aversion often leads to flawed
@@ -1167,7 +1182,7 @@
             </li>
 
             <!-- Swiss Robotic Day -->
-            <li class="blog-post-item">
+            <li class="blog-post-item" data-filter-item data-category="robotics">
               <a
                 href="https://medium.com/@stockerjulien/swiss-robotic-day-2024-a-reflection-on-innovation-and-entrepreneurship-b9a7177c296d">
 
@@ -1200,11 +1215,11 @@
             </li>
 
             <!-- Dont Die Economy -->
-            <li class="blog-post-item">
+            <li class="blog-post-item" data-filter-item data-category="environmental monitoring">
               <a href="https://medium.com/@stockerjulien/menace-in-the-deep-d832fee3361b">
 
                 <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-menace1" alt="alt-tag" loading="lazy">
+                  <img src="./assets/images/blog-menace1.png" alt="Munitions in lake" loading="lazy">
                 </figure>
 
                 <div class="blog-content">
@@ -1234,148 +1249,6 @@
               </a>
             </li>
 
-            <!-- <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-2.jpg" alt="Best fonts every designer" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Best fonts every designer</h3>
-
-                  <p class="blog-text">
-                    Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-3.jpg" alt="Design digest #80" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #80</h3>
-
-                  <p class="blog-text">
-                    Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">UI interactions of the week</h3>
-
-                  <p class="blog-text">
-                    Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">The forgotten art of spacing</h3>
-
-                  <p class="blog-text">
-                    Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #79</h3>
-
-                  <p class="blog-text">
-                    Optio
-
- cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
-                  </p>
-
-                </div>
-
-              </a>
-            </li> -->
-
           </ul>
 
         </section>
@@ -1400,6 +1273,9 @@
           </li>
           <li class="filter-item">
             <button data-filter-btn>Nature</button>
+          </li>
+          <li class="filter-item">
+            <button data-filter-btn>Film Photography</button>
           </li>
           <li class="filter-item">
             <button data-filter-btn>Videos</button>

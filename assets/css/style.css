@@ -2637,8 +2637,6 @@ textarea.form-input::-webkit-resizer {
   }
 
 
-<<<<<<< Updated upstream
-=======
 }
 
 /* Blog Filter Styles */
@@ -2695,7 +2693,7 @@ textarea.form-input::-webkit-resizer {
   border-radius: 16px;
   box-shadow: var(--shadow-4);
   transition: transform 0.3s ease;
-  aspect-ratio: 1;
+  aspect-ratio: 3/4;
   background: var(--border-gradient-onyx);
   z-index: 1;
 }
@@ -2837,5 +2835,29 @@ textarea.form-input::-webkit-resizer {
   border-radius: 8px;
   font-size: var(--fs-7) !important;
   color: var(--vegas-gold) !important;
->>>>>>> Stashed changes
+}
+
+/* Film photography styles */
+[data-category="film photography"] img {
+  filter: grayscale(30%) sepia(20%) !important;
+  transition: filter 0.5s ease;
+}
+
+[data-category="film photography"]:hover img {
+  filter: grayscale(10%) sepia(15%) !important;
+}
+
+[data-category="film photography"] figcaption {
+  font-style: italic;
+}
+
+/* Add film border to film photography items */
+[data-category="film photography"] .gallery-figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 8px solid rgba(0, 0, 0, 0.8);
+  border-radius: 14px;
+  pointer-events: none;
+  z-index: 2;
 }

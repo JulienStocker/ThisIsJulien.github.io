@@ -178,4 +178,33 @@ const sortProjectsByDate = () => {
 };
 
 // Call the function to sort projects on page load
-window.addEventListener("DOMContentLoaded", sortProjectsByDate);
+window.addEventListener("DOMContentLoaded", function() {
+  sortProjectsByDate();
+  
+  // Images page filtering functionality
+  const imagesFilterButtons = document.querySelectorAll('.images .filter-list .filter-item button');
+  const imagesFilterItems = document.querySelectorAll('.images [data-filter-item]');
+  
+  imagesFilterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all buttons
+      imagesFilterButtons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to clicked button
+      button.classList.add('active');
+      
+      const filterValue = button.textContent.toLowerCase();
+      
+      imagesFilterItems.forEach(item => {
+        if (filterValue === 'all') {
+          item.style.display = 'block';
+        } else {
+          if (item.dataset.category === filterValue) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        }
+      });
+    });
+  });
+});
