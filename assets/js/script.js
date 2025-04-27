@@ -208,3 +208,30 @@ window.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+// Blog filtering - using unique selectors to avoid conflicts
+const blogFilterButtons = document.querySelectorAll('.blog [data-filter-btn]');
+const blogFilterItems = document.querySelectorAll('.blog [data-filter-item]');
+
+blogFilterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Remove active class from all buttons
+    blogFilterButtons.forEach(btn => btn.classList.remove('active'));
+    // Add active class to clicked button
+    button.classList.add('active');
+
+    const filterValue = button.textContent.toLowerCase();
+
+    blogFilterItems.forEach(item => {
+      if (filterValue === 'all') {
+        item.style.display = 'block';
+      } else {
+        if (item.dataset.category === filterValue) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      }
+    });
+  });
+});
