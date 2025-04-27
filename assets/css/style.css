@@ -1250,6 +1250,7 @@ main {
   height: 200px;
   border-radius: 12px;
   overflow: hidden;
+  position: relative;
 }
 
 .project-banner-box img {
@@ -1283,112 +1284,17 @@ main {
   margin-bottom: 10px;
 }
 
-.project-item.active {
-  position: relative;
-  background: var(--border-gradient-onyx);
-  height: 100%;
-  box-shadow: var(--shadow-4);
-  border-radius: 16px;
-  z-index: 1;
+.project-meta :is(.project-category, time) {
+  color: var(--light-gray-70);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
 }
 
-@keyframes scaleUp {
-  0% {
-    transform: scale(0.5);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-.project-content {
-  padding: 15px;
-}
-
-.project-item>a {
-  width: 100%;
-}
-
-.project-img {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 15px;
-}
-
-.project-img::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  z-index: 1;
-  transition: var(--transition-1);
-}
-
-.project-item>a:hover .project-img::before {
-  background: hsla(0, 0%, 0%, 0.5);
-}
-
-.project-item-icon-box {
-  --scale: 0.8;
-
-  background: var(--jet);
-  color: var(--orange-yellow-crayola);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(var(--scale));
-  font-size: 20px;
-  padding: 18px;
-  border-radius: 12px;
-  opacity: 0;
-  z-index: 1;
-  transition: var(--transition-1);
-}
-
-.project-item>a:hover .project-item-icon-box {
-  --scale: 1;
-  opacity: 1;
-}
-
-.project-item-icon-box ion-icon {
-  --ionicon-stroke-width: 50px;
-}
-
-.project-img-box {
-  width: 100%;
-  height: 200px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.project-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition-1);
-}
-
-.project-item>a:hover project-img-box img {
-  transform: scale(1.1);
-}
-
-.project-content {
-  padding: 15px;
-}
-
-.project-meta {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 10px;
+.project-meta .dot {
+  background: var(--light-gray-70);
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
 }
 
 .project-title,
@@ -2701,4 +2607,24 @@ textarea.form-input::-webkit-resizer {
   .client-logo {
     max-width: 80%;
   }
+}
+
+/* GitHub icon in project cards */
+.github-icon-box {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+  opacity: 0.7;
+  transition: var(--transition-1);
+}
+
+.github-icon-box:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.github-icon-box ion-icon {
+  font-size: 1.5em;
+  color: var(--white-2);
 }
