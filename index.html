@@ -36,6 +36,43 @@
     })();
   </script>
 
+  <style>
+    .project-icons-container {
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+      display: flex;
+      gap: 4px;
+      z-index: 2;
+    }
+    
+    .project-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background-color: rgba(33, 33, 35, 0.8);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .project-icon:hover {
+      background-color: var(--orange-yellow-crayola);
+      transform: translateY(-3px);
+    }
+    
+    .project-icon ion-icon {
+      color: white;
+      font-size: 16px;
+    }
+
+    .project-banner-box {
+      position: relative;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -1147,7 +1184,60 @@
               </a>
             </li>
 
-          </ul>
+            <!-- ARC Docker - Isaac Gym -->
+            <!-- <li class="project-item active" data-filter-item data-category="mobile robotics">
+              <a href="https://github.com/ChristopherJulien/ARC-Docker" target="_blank">
+                <figure class="project-banner-box">
+                  <img src="./assets/images/proj-arc.png" alt="Isaac Gym" loading="lazy">
+                </figure>
+                <div class="project-content">
+                  <h3 class="h3 project-item-title">ARC-Docker</h3>
+                  <p class="project-text">IsaacGymEnvs Learning Pipeline</p>
+                  <div class="project-meta">
+                    <p class="project-category">Robot Simulation</p>
+                    <span class="dot"></span>
+                    <time datetime="2025-01-07">2025</time>
+                  </div>
+                </div>
+              </a>
+            </li> -->
+
+            <!-- Smart Mirror -->
+            <!-- <li class="project-item active" data-filter-item data-category="internet of things">
+              <a href="https://github.com/ChristopherJulien/SmartMirror" target="_blank">
+                <figure class="project-banner-box">
+                  <img src="./assets/images/proj-mirror.png" alt="Smart Mirror" loading="lazy">
+                </figure>
+                <div class="project-content">
+                  <h3 class="h3 project-item-title">Smart Mirror</h3>
+                  <p class="project-text">Interactive Smart Mirror Interface</p>
+                  <div class="project-meta">
+                    <p class="project-category">IoT & JavaScript</p>
+                    <span class="dot"></span>
+                    <time datetime="2025-03-16">2025</time>
+                  </div>
+                </div>
+              </a>
+            </li> -->
+
+            <!-- Combined Environment Control Interface -->
+            <!-- <li class="project-item active" data-filter-item data-category="internet of things">
+              <a href="https://github.com/ChristopherJulien/Combined-Environment-Control-Interface" target="_blank">
+                <figure class="project-banner-box">
+                  <img src="./assets/images/proj-ceci.png" alt="Environment Control" loading="lazy">
+                </figure>
+                <div class="project-content">
+                  <h3 class="h3 project-item-title">Environment Control Interface</h3>
+                  <p class="project-text">Combined Environment Control System</p>
+                  <div class="project-meta">
+                    <p class="project-category">Automation & Python</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-09-25">2024</time>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul> -->
 
         </section>
       </article>
@@ -1369,20 +1459,50 @@
         const href = projectLink.getAttribute('href');
         const bannerBox = projectLink.querySelector('.project-banner-box');
         
-        // Check if link contains github and banner box exists
-        if (href && href.includes('github.com') && bannerBox && !projectLink.querySelector('.github-icon-box')) {
-          const githubIcon = document.createElement('div');
-          githubIcon.className = 'github-icon-box';
-          githubIcon.innerHTML = '<ion-icon name="logo-github"></ion-icon>';
+        // Create icons container for all icons
+        if (bannerBox && !projectLink.querySelector('.project-icons-container')) {
+          const iconsContainer = document.createElement('div');
+          iconsContainer.className = 'project-icons-container';
           
-          // Add click handler to prevent parent link from being triggered
-          githubIcon.addEventListener('click', function(e) {
+          // Add GitHub icon if the link is to GitHub
+          if (href && href.includes('github.com')) {
+            const githubIcon = document.createElement('div');
+            githubIcon.className = 'project-icon github-icon';
+            githubIcon.innerHTML = '<ion-icon name="logo-github"></ion-icon>';
+            
+            // Add click handler to prevent parent link from being triggered
+            githubIcon.addEventListener('click', function(e) {
+              e.stopPropagation();
+              window.open(href, '_blank');
+            });
+            
+            iconsContainer.appendChild(githubIcon);
+          }
+          
+          // Add film icon to all projects
+          const filmIcon = document.createElement('div');
+          filmIcon.className = 'project-icon film-icon';
+          filmIcon.innerHTML = '<ion-icon name="film-outline"></ion-icon>';
+          filmIcon.addEventListener('click', function(e) {
             e.stopPropagation();
-            window.open(href, '_blank');
+            // Add your video link or action here
+            alert('Video coming soon!');
           });
+          iconsContainer.appendChild(filmIcon);
+          
+          // Add text/document icon to all projects
+          const textIcon = document.createElement('div');
+          textIcon.className = 'project-icon text-icon';
+          textIcon.innerHTML = '<ion-icon name="document-text-outline"></ion-icon>';
+          textIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            // Add your documentation link or action here
+            alert('Documentation coming soon!');
+          });
+          iconsContainer.appendChild(textIcon);
           
           // Append to banner box
-          bannerBox.appendChild(githubIcon);
+          bannerBox.appendChild(iconsContainer);
         }
       });
     });
