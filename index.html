@@ -560,7 +560,7 @@
             <div class="icon-box">
               <ion-icon name="git-branch"></ion-icon>
             </div>
-            <h3 class="h3">Work & Entrepreneurial Experience</h3>
+            <h3 class="h3">Work Experience</h3>
           </div>
 
           <ol class="timeline-list">
@@ -1455,9 +1455,31 @@
     document.addEventListener('DOMContentLoaded', function() {
       const projectItems = document.querySelectorAll('.project-item > a');
       
+      // List of projects that should have text icons
+      const projectsWithTextIcon = [
+        'Spondylus',
+        'Probe Detection',
+        'Fluidic Brain',
+        'Robotic Arm',
+        'Perfit',
+        'Artificial Muscles',
+        'Thymio Navigation',
+        'Mori Robot',
+        'Swarm Simulation',
+        'Rocket Thruster',
+        'SuperVisors'
+      ];
+      
+      // Map of projects to their documentation PDFs
+      const projectDocLinks = {
+        'Rocket Thruster': 'assets/papers/ME_425_Rocket_Control_Report.pdf',
+        'Artificial Muscles': 'assets/papers/Artificial_Muscles_Group_2.pdf'
+      };
+      
       projectItems.forEach(function(projectLink) {
         const href = projectLink.getAttribute('href');
         const bannerBox = projectLink.querySelector('.project-banner-box');
+        const projectTitle = projectLink.querySelector('.project-item-title')?.textContent.trim();
         
         // Create icons container for all icons
         if (bannerBox && !projectLink.querySelector('.project-icons-container')) {
@@ -1490,16 +1512,27 @@
           });
           iconsContainer.appendChild(filmIcon);
           
-          // Add text/document icon to all projects
-          const textIcon = document.createElement('div');
-          textIcon.className = 'project-icon text-icon';
-          textIcon.innerHTML = '<ion-icon name="document-text-outline"></ion-icon>';
-          textIcon.addEventListener('click', function(e) {
-            e.stopPropagation();
-            // Add your documentation link or action here
-            alert('Documentation coming soon!');
-          });
-          iconsContainer.appendChild(textIcon);
+          // Add text/document icon only to specific projects
+          if (projectTitle && projectsWithTextIcon.some(title => projectTitle.includes(title))) {
+            const textIcon = document.createElement('div');
+            textIcon.className = 'project-icon text-icon';
+            textIcon.innerHTML = '<ion-icon name="document-text-outline"></ion-icon>';
+            textIcon.addEventListener('click', function(e) {
+              e.stopPropagation();
+              
+              // Check if there's a specific PDF link for this project
+              for (const [project, docLink] of Object.entries(projectDocLinks)) {
+                if (projectTitle.includes(project)) {
+                  window.open(docLink, '_blank');
+                  return;
+                }
+              }
+              
+              // Default behavior for projects without specific links
+              alert('Documentation coming soon!');
+            });
+            iconsContainer.appendChild(textIcon);
+          }
           
           // Append to banner box
           bannerBox.appendChild(iconsContainer);
