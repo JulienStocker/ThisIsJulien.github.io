@@ -567,7 +567,7 @@
             <li class="timeline-item">
               <h4 class="h4 timeline-item-title">Software Engineer Intern at Witty Machines</h4>
               <div class="timeline-container">
-                <span class="dates">February 2025 — Ongoing</span>
+                <span class="dates">February 2025 — May 2025</span>
                 <span class="location">Zurich, Switzerland</span>
               </div>
               <p class="timeline-text">
@@ -1262,6 +1262,9 @@
           <li class="filter-item">
             <button data-filter-btn>Environmental Monitoring</button>
           </li>
+          <li class="filter-item">
+            <button data-filter-btn>Pattern Recognition</button>
+          </li>
         </ul>
 
         <section class="blog-posts">
@@ -1458,22 +1461,33 @@
       // List of projects that should have text icons
       const projectsWithTextIcon = [
         'Spondylus',
-        'Probe Detection',
         'Fluidic Brain',
         'Robotic Arm',
-        'Perfit',
         'Artificial Muscles',
-        'Thymio Navigation',
         'Mori Robot',
         'Swarm Simulation',
         'Rocket Thruster',
         'SuperVisors'
       ];
       
+      // Map of projects to their presentation PDFs
+      const projectPresentationLinks = {
+        'Spondylus': 'assets/presentation/BRIDGE_PoC_SPONDYLUS_final.pdf',
+        'Robotic Arm': 'assets/presentation/Semester_Project_LASA_Presentation.pdf',
+        'Fluidic Brain': 'assets/presentation/Fluidic_Brain___Master_Thesis_Presentation.pdf'
+      };
+      
       // Map of projects to their documentation PDFs
       const projectDocLinks = {
+        'Spondylus': 'assets/papers/BRIDGE_PoC_SPONDYLUS_final.pdf',
         'Rocket Thruster': 'assets/papers/ME_425_Rocket_Control_Report.pdf',
-        'Artificial Muscles': 'assets/papers/Artificial_Muscles_Group_2.pdf'
+        'Artificial Muscles': 'assets/papers/Artificial_Muscles_Group_2.pdf',
+        'Fluidic Brain': 'assets/papers/Fluidic_Brain___Master_Thesis.pdf',
+        'Mori Robot': 'assets/papers/Semester_Project_RRL.pdf',
+        'Robotic Arm': 'assets/papers/Semester_Project_LASA.pdf',
+        'Thymio Navigation': 'https://github.com/ryared/MobileRobotics-Project/blob/main/Report.ipynb',
+        'Swarm Simulation': 'assets/papers/DIS_project_report.pdf',
+        'SuperVisors': 'assets/papers/MPDD_Paik.pdf'
       };
       
       projectItems.forEach(function(projectLink) {
@@ -1513,6 +1527,18 @@
             iconsContainer.appendChild(filmIcon);
           }
           
+          // Add film icon for Artificial Muscles
+          if (projectTitle && projectTitle.includes('Artificial Muscles')) {
+            const filmIcon = document.createElement('div');
+            filmIcon.className = 'project-icon film-icon';
+            filmIcon.innerHTML = '<ion-icon name="film-outline"></ion-icon>';
+            filmIcon.addEventListener('click', function(e) {
+              e.stopPropagation();
+              window.open('./assets/video/artificial_muscles.gif', '_blank');
+            });
+            iconsContainer.appendChild(filmIcon);
+          }
+          
           // Add text/document icon only to specific projects
           if (projectTitle && projectsWithTextIcon.some(title => projectTitle.includes(title))) {
             const textIcon = document.createElement('div');
@@ -1533,6 +1559,25 @@
               alert('Documentation coming soon!');
             });
             iconsContainer.appendChild(textIcon);
+          }
+
+          // Add presentation icon for specific projects
+          if (projectTitle && Object.keys(projectPresentationLinks).some(title => projectTitle.includes(title))) {
+            const presentationIcon = document.createElement('div');
+            presentationIcon.className = 'project-icon presentation-icon';
+            presentationIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512" style="width: 16px; height: 16px;"><rect x="64" y="176" width="384" height="256" rx="28.87" ry="28.87" fill="none" stroke="white" stroke-linejoin="round" stroke-width="32"/><path stroke="white" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M144 80h224M112 128h288"/></svg>';
+            presentationIcon.addEventListener('click', function(e) {
+              e.stopPropagation();
+              
+              // Check if there's a specific presentation link for this project
+              for (const [project, presentationLink] of Object.entries(projectPresentationLinks)) {
+                if (projectTitle.includes(project)) {
+                  window.open(presentationLink, '_blank');
+                  return;
+                }
+              }
+            });
+            iconsContainer.appendChild(presentationIcon);
           }
           
           // Append to banner box
