@@ -716,14 +716,14 @@
 
         <section class="timeline">
           <div class="title-wrapper">
-            <!-- <div class="icon-box">
+            <div class="icon-box">
               <ion-icon name="code-working"></ion-icon>
-            </div> -->
+            </div>
             <h3 class="h3">Technical Skills</h3>
           </div>
           <div class="coding-languages-container">
-            <img alt="top langs" style="height: 200px;" src="https://github-readme-stats.vercel.app/api/top-langs/?username=JulienStocker&hide=makefile,cmake,jupyter%20notebook&layout=donut&hide_title=true&title_color=C5B358&text_color=D6D6D6&icon_color=F2D24F&bg_color=212123&hide_border=true" loading="lazy"/>
-            <img alt="my stats" style="height: 200px;" src="https://github-readme-stats.vercel.app/api?username=JulienStocker&show_icons=true&rank_icon=github&hide_rank=true&hide_title=true&title_color=C5B358&text_color=D6D6D6&icon_color=F2D24F&bg_color=212123&hide_border=true&include_all_commits=true" loading="lazy"/>
+            <img alt="top langs" style="height: 200px;" src="https://this-is-chris-github-io-git-master-juliens-projects-44975c4d.vercel.app/api/top-langs/?username=JulienStocker&hide=makefile,cmake,jupyter%20notebook&layout=donut&hide_title=true&title_color=C5B358&text_color=D6D6D6&icon_color=F2D24F&bg_color=212123&hide_border=true" loading="lazy"/>
+            <img alt="my stats" style="height: 200px;" src="https://this-is-chris-github-io-git-master-juliens-projects-44975c4d.vercel.app/api?username=JulienStocker&show_icons=true&rank_icon=github&hide_rank=true&hide_title=true&title_color=C5B358&text_color=D6D6D6&icon_color=F2D24F&bg_color=212123&hide_border=true&include_all_commits=true" loading="lazy"/>
           </div>
         </section>
 
@@ -1507,8 +1507,11 @@
           filmIcon.innerHTML = '<ion-icon name="film-outline"></ion-icon>';
           filmIcon.addEventListener('click', function(e) {
             e.stopPropagation();
-            // Add your video link or action here
-            alert('Video coming soon!');
+            if (projectTitle && projectTitle.includes('ROS 2 Navigation')) {
+              window.open('./assets/images/projects/iRobotCreate3.gif', '_blank');
+            } else {
+              alert('Video coming soon!');
+            }
           });
           iconsContainer.appendChild(filmIcon);
           
