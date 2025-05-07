@@ -1501,19 +1501,17 @@
             iconsContainer.appendChild(githubIcon);
           }
           
-          // Add film icon to all projects
-          const filmIcon = document.createElement('div');
-          filmIcon.className = 'project-icon film-icon';
-          filmIcon.innerHTML = '<ion-icon name="film-outline"></ion-icon>';
-          filmIcon.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (projectTitle && projectTitle.includes('ROS 2 Navigation')) {
-              window.open('./assets/images/projects/iRobotCreate3.gif', '_blank');
-            } else {
-              alert('Video coming soon!');
-            }
-          });
-          iconsContainer.appendChild(filmIcon);
+          // Only add film icon to projects that have a film
+          if (projectTitle && projectTitle.includes('ROS 2 Navigation')) {
+            const filmIcon = document.createElement('div');
+            filmIcon.className = 'project-icon film-icon';
+            filmIcon.innerHTML = '<ion-icon name="film-outline"></ion-icon>';
+            filmIcon.addEventListener('click', function(e) {
+              e.stopPropagation();
+              window.open('./assets/video/iRobotCreate3.gif', '_blank');
+            });
+            iconsContainer.appendChild(filmIcon);
+          }
           
           // Add text/document icon only to specific projects
           if (projectTitle && projectsWithTextIcon.some(title => projectTitle.includes(title))) {
