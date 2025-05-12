@@ -7,6 +7,7 @@ import re
 import random
 from datetime import datetime
 from bs4 import BeautifulSoup
+import requests
 
 # Configure logging
 logging.basicConfig(
@@ -15,9 +16,15 @@ logging.basicConfig(
 )
 
 def load_medium_posts():
-    """Load Medium posts from the markdown file or fetch them directly"""
+    """Load Medium posts from the JSON file or fetch them directly"""
     try:
-        # Check if medium_posts.md exists
+        # First check if medium_posts.json exists
+        if os.path.exists('medium_posts.json'):
+            logging.info("Loading Medium posts from medium_posts.json")
+            with open('medium_posts.json', 'r') as f:
+                return json.load(f)
+        
+        # If JSON file doesn't exist, try the markdown file
         if os.path.exists('medium_posts.md'):
             logging.info("Loading Medium posts from medium_posts.md")
             with open('medium_posts.md', 'r') as f:
@@ -30,7 +37,9 @@ def load_medium_posts():
                 posts.append({
                     'title': match.group(1),
                     'link': match.group(2),
-                    'date': match.group(3)
+                    'published': match.group(3),
+                    'image_url': None,  # No image URL in markdown
+                    'local_image': None
                 })
             return posts
         else:
@@ -38,13 +47,55 @@ def load_medium_posts():
             # If the file doesn't exist, try running the update-medium.py script
             if os.path.exists('update-medium.py'):
                 logging.info("Running update-medium.py to fetch posts")
-                os.system('python update-medium.py')
+                os.system('python3 update-medium.py')
                 # Recursive call to load the file that should now exist
                 return load_medium_posts()
             return []
     except Exception as e:
         logging.error(f"Error loading Medium posts: {str(e)}")
         return []
+
+def download_image(image_url, post_title):
+    """Download image from URL and save to local directory"""
+    if not image_url:
+        return None
+        
+    try:
+        # Create images directory if it doesn't exist
+        os.makedirs('assets/images/blog', exist_ok=True)
+        
+        # Generate safe filename from post title
+        safe_title = "".join([c if c.isalnum() else "_" for c in post_title]).lower()
+        safe_title = re.sub(r'_+', '_', safe_title)  # Replace multiple underscores with a single one
+        
+        # Get file extension from URL or default to .jpg
+        file_ext = os.path.splitext(image_url)[1]
+        if not file_ext or len(file_ext) > 5:
+            file_ext = '.jpg'
+            
+        # Create filename
+        filename = f"medium_{safe_title}{file_ext}"
+        filepath = os.path.join('assets/images/blog', filename)
+        
+        # Check if file already exists
+        if os.path.exists(filepath):
+            logging.info(f"Image already exists: {filepath}")
+            return filepath
+        
+        # Download the image
+        response = requests.get(image_url, stream=True)
+        response.raise_for_status()
+        
+        with open(filepath, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+                
+        logging.info(f"Downloaded image to: {filepath}")
+        return filepath
+        
+    except Exception as e:
+        logging.error(f"Error downloading image: {str(e)}")
+        return None
 
 def update_blog_section(html_file, posts):
     """Update the blog section in the HTML file with Medium posts"""
@@ -66,47 +117,32 @@ def update_blog_section(html_file, posts):
             logging.error("Blog posts list not found in HTML")
             return False
             
-        # Get current posts to avoid duplicates
-        current_links = set()
-        for post_item in blog_posts_list.select('.blog-post-item a'):
-            link = post_item.get('href')
-            if link:
-                current_links.add(link)
+        # Check for existing posts
+        existing_posts = []
+        medium_links = {post['link'] for post in posts}
         
-        # Prepare blog images
-        blog_images = get_blog_images()
-        
-        # Create new post items for each Medium post that isn't already included
+        # Clear all existing blog posts and replace with only Medium posts
+        blog_posts_list.clear()
+        logging.info("Cleared all existing blog posts")
+            
+        # Create new post items for each Medium post
         posts_added = 0
         for post in posts:
-            if post['link'] not in current_links:
-                # Create a new post item
-                new_post = create_blog_post_item(post, blog_images)
-                
-                # Insert at the beginning of the list to show newest first
-                if blog_posts_list.contents:
-                    blog_posts_list.insert(0, new_post)
-                else:
-                    blog_posts_list.append(new_post)
-                    
-                posts_added += 1
-                logging.info(f"Added post: {post['title']}")
-                
-                # Keep only the latest 8 posts to avoid cluttering
-                if len(blog_posts_list.select('.blog-post-item')) > 8:
-                    old_posts = blog_posts_list.select('.blog-post-item')
-                    for old_post in old_posts[8:]:
-                        old_post.extract()
-        
-        if posts_added == 0:
-            logging.info("No new posts to add")
-            return False
+            # Create a new post item
+            new_post = create_blog_post_item(post)
             
+            # Add to the blog posts list
+            blog_posts_list.append(new_post)
+                
+            posts_added += 1
+            logging.info(f"Added post: {post['title']}")
+        
         # Save the updated HTML
         with open(html_file, 'w', encoding='utf-8') as f:
             f.write(str(soup))
             
-        logging.info(f"Added {posts_added} new posts to {html_file}")
+        logging.info(f"Added {posts_added} Medium posts to index.html")
+        logging.info("Blog section updated successfully")
         return True
         
     except Exception as e:
@@ -150,93 +186,142 @@ def get_blog_images():
     
     return blog_images
 
-def create_blog_post_item(post, blog_images):
+def create_blog_post_item(post):
     """Create a blog post item element based on the existing structure"""
     # Determine the category based on the post title/content
     category = determine_category(post['title'])
-    category_key = category.lower().split()[0]  # Get the first word of category in lowercase
     
     # Select an appropriate image for the post
-    image_path = select_blog_image(category_key, blog_images)
+    image_path = select_image_for_post(post, category)
     
     # Parse date
     try:
-        post_date = datetime.strptime(post['date'], '%Y-%m-%d')
-        formatted_date = post_date.strftime('%b %d, %Y')
+        # Try to parse if it's not already in the desired format
+        if not re.match(r'[A-Z][a-z]{2} \d{1,2}, \d{4}', post['published']):
+            post_date = datetime.strptime(post['published'], '%a, %d %b %Y %H:%M:%S %Z')
+            formatted_date = post_date.strftime('%b %d, %Y')
+        else:
+            formatted_date = post['published']
     except:
-        formatted_date = post['date']
+        formatted_date = post['published']
     
     # Create new post HTML using BeautifulSoup
     soup = BeautifulSoup('', 'html.parser')
-    li = soup.new_tag('li', attrs={'class': 'blog-post-item'})
-    li['data-filter-item'] = ""
-    li['data-category'] = category.lower()
     
+    # Create the li element
+    li = soup.new_tag('li', attrs={'class': 'blog-post-item', 'data-category': category.lower(), 'data-filter-item': ''})
+    
+    # Create the anchor element
     a = soup.new_tag('a', href=post['link'])
     
+    # Create the figure element
     figure = soup.new_tag('figure', attrs={'class': 'blog-banner-box'})
     img = soup.new_tag('img', attrs={
         'src': image_path,
-        'alt': f'{category} blog post',
+        'alt': f"{category} blog post",
         'loading': 'lazy'
     })
     figure.append(img)
     a.append(figure)
     
+    # Create the content div
     content_div = soup.new_tag('div', attrs={'class': 'blog-content'})
     
-    meta_div = soup.new_tag('div', attrs={'class': 'blog-meta'})
-    p_category = soup.new_tag('p', attrs={'class': 'blog-category'})
-    p_category.string = category
-    meta_div.append(p_category)
+    # Add the title
+    title = soup.new_tag('h3', attrs={'class': 'h3 blog-item-title'})
+    title.string = post['title']
+    content_div.append(title)
     
+    # Add the meta div
+    meta_div = soup.new_tag('div', attrs={'class': 'blog-meta'})
+    
+    # Add the category
+    category_p = soup.new_tag('p', attrs={'class': 'blog-category'})
+    category_p.string = category
+    meta_div.append(category_p)
+    
+    # Add the dot separator
     span_dot = soup.new_tag('span', attrs={'class': 'dot'})
     meta_div.append(span_dot)
     
-    time_tag = soup.new_tag('time', datetime=post['date'])
+    # Add the date
+    time_tag = soup.new_tag('time', datetime=formatted_date)
     time_tag.string = formatted_date
     meta_div.append(time_tag)
     
     content_div.append(meta_div)
     
-    h3 = soup.new_tag('h3', attrs={'class': 'h3 blog-item-title'})
-    h3.string = post['title']
-    content_div.append(h3)
-    
-    # Add excerpt if available (first ~100 chars of blog post)
-    p_text = soup.new_tag('p', attrs={'class': 'blog-text'})
-    excerpt = generate_excerpt(post['title'])
-    p_text.string = excerpt
-    content_div.append(p_text)
+    # Add the excerpt
+    excerpt = soup.new_tag('p', attrs={'class': 'blog-text'})
+    excerpt.string = generate_excerpt(post['title'])
+    content_div.append(excerpt)
     
     a.append(content_div)
     li.append(a)
     
     return li
 
-def select_blog_image(category, blog_images):
-    """Select an appropriate blog image for the category"""
-    # Default image path
-    default_image = './assets/images/blog/blog-1.png'
+def select_image_for_post(post, category):
+    """Select an appropriate image for the post"""
+    # First check if the post has its own downloaded Medium image
+    if post.get('local_image') and os.path.exists(post['local_image']):
+        logging.info(f"Using existing local image for post: {post['title']}")
+        return post['local_image']
+        
+    # If no local image but has image_url, download it
+    if post.get('image_url'):
+        local_image = download_image(post['image_url'], post['title'])
+        if local_image:
+            post['local_image'] = local_image
+            logging.info(f"Downloaded and using Medium image for: {post['title']}")
+            return local_image
     
-    if not blog_images:
-        return default_image
+    # Then look for category-specific images
+    category_key = category.lower().split()[0]  # Get first word of category
     
-    # Try to find an image matching the category
-    for img_category, images in blog_images.items():
-        if category in img_category and images:
-            return random.choice(images)
+    # Check if blog images folder exists
+    blog_images_path = 'assets/images/blog'
+    if os.path.exists(blog_images_path):
+        logging.info(f"Found blog images folder: {blog_images_path}")
+        
+        # Try to find a category-specific image
+        category_images = []
+        for filename in os.listdir(blog_images_path):
+            if filename.lower().startswith(category_key) and filename.endswith(('.jpg', '.jpeg', '.png', '.webp')):
+                category_images.append(filename)
+        
+        if category_images:
+            logging.info(f"Found blog images for categories: {category_key}")
+            image_path = os.path.join(blog_images_path, random.choice(category_images))
+            return image_path
+        
+        # If no category-specific image found, use a relevant image based on context
+        if category == 'Finance':
+            candidates = [f for f in os.listdir(blog_images_path) if 'blog-1' in f.lower()]
+            if candidates:
+                return os.path.join(blog_images_path, candidates[0])
+        elif category == 'Robotics':
+            candidates = [f for f in os.listdir(blog_images_path) if 'blog-2' in f.lower()]
+            if candidates:
+                return os.path.join(blog_images_path, candidates[0])
+        elif category.startswith('Environmental'):
+            candidates = [f for f in os.listdir(blog_images_path) if 'agro' in f.lower() or 'menace' in f.lower()]
+            if candidates:
+                return os.path.join(blog_images_path, random.choice(candidates))
+        
+        # Fallback to any image
+        image_files = [f for f in os.listdir(blog_images_path) 
+                     if f.endswith(('.jpg', '.jpeg', '.png', '.webp')) 
+                     and not f.startswith('image-coming-soon')]
+        if image_files:
+            logging.info(f"Found blog images for categories: default")
+            return os.path.join(blog_images_path, random.choice(image_files))
     
-    # If no match, use default category if available
-    if 'default' in blog_images and blog_images['default']:
-        return random.choice(blog_images['default'])
+    # Ultimate fallback - use image-coming-soon.png or a default path
+    if os.path.exists(os.path.join(blog_images_path, 'image-coming-soon.png')):
+        return os.path.join(blog_images_path, 'image-coming-soon.png')
     
-    # Fallback to any available image
-    for images in blog_images.values():
-        if images:
-            return random.choice(images)
-    
-    return default_image
+    return './assets/images/blog/image-coming-soon.png'
 
 def generate_excerpt(title):
     """Generate a sensible excerpt based on the post title"""
@@ -306,21 +391,23 @@ def determine_category(title):
     return "Robotics"
 
 def main():
+    # Set the HTML file to update
     html_file = 'index.html'
     
     # Load Medium posts
     posts = load_medium_posts()
+    
     if not posts:
         logging.error("No Medium posts found")
         sys.exit(1)
-    
-    # Update blog section
+        
+    # Update the blog section
     success = update_blog_section(html_file, posts)
-    if not success:
-        logging.warning("Blog section not updated")
-        sys.exit(0)
-    else:
+    
+    if success:
         logging.info("Blog section updated successfully")
-
+    else:
+        logging.warning("Blog section not updated")
+        
 if __name__ == "__main__":
     main()

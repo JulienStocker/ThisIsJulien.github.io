@@ -1,0 +1,39 @@
+/* Blog post styling fixes */
+
+/* Full date display */
+.blog-meta time {
+  white-space: nowrap;
+  overflow: visible;
+}
+
+/* Improve blog post layout */
+.blog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-item-title {
+  order: 1;
+  margin-bottom: 5px;
+}
+
+.blog-meta {
+  order: 2;
+  margin-bottom: 10px;
+}
+
+.blog-text {
+  order: 3;
+}
+
+/* Make blog metadata text smaller */
+.blog-meta :is(.blog-category, time) {
+  font-size: 0.85rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .blog-meta :is(.blog-category, time) {
+    font-size: 0.75rem;
+  }
+} 
