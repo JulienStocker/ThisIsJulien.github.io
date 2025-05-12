@@ -189,7 +189,7 @@ def get_blog_images():
 def create_blog_post_item(post):
     """Create a blog post item element based on the existing structure"""
     # Determine the category based on the post title/content
-    category = determine_category(post['title'])
+    category = determine_category_with_content(post)
     
     # Select an appropriate image for the post
     image_path = select_image_for_post(post, category)
@@ -371,24 +371,160 @@ def generate_excerpt(title):
         return random.choice(default_phrases)
 
 def determine_category(title):
-    """Determine blog category based on post title"""
+    """Determine blog category based on post title and content"""
     title_lower = title.lower()
     
     # Define keywords for each category
     categories = {
-        'Finance': ['finance', 'investing', 'money', 'economy', 'bank', 'fintech', 'crypto', 'blockchain'],
-        'Robotics': ['robot', 'robotics', 'automation', 'autonomous', 'ai', 'machine learning'],
-        'Environmental Monitoring': ['environment', 'climate', 'monitoring', 'conservation', 'sustainable'],
-        'Pattern Recognition': ['pattern', 'recognition', 'computer vision', 'ai', 'machine learning']
+        'Finance': ['finance', 'investing', 'money', 'economy', 'bank', 'fintech', 'crypto', 'blockchain', 
+                   'metals', 'company', 'stock', 'market', 'financial', 'investment', 'fund', 'trading', 
+                   'economic', 'fiscal', 'monetary', 'dividend', 'portfolio', 'asset'],
+        
+        'Robotics': ['robot', 'robotics', 'automation', 'autonomous', 'ai', 'machine learning', 
+                    'artificial intelligence', 'drone', 'self-driving', 'ros', 'sensor', 'actuator', 
+                    'mechatronics', 'control system', 'navigation', 'slam', 'robotic day'],
+        
+        'Environmental Monitoring': ['environment', 'climate', 'monitoring', 'conservation', 'sustainable', 
+                                    'green', 'eco', 'nature', 'wildlife', 'biodiversity', 'pollution', 
+                                    'recycling', 'renewable', 'sustainability', 'carbon', 'emission', 
+                                    'lake', 'ocean', 'water', 'forest', 'ecosystem', 'menace', 'threat', 'swan'],
+        
+        'Pattern Recognition': ['pattern', 'recognition', 'computer vision', 'ai', 'machine learning', 
+                               'neural network', 'deep learning', 'image processing', 'classification', 
+                               'detection', 'clustering', 'feature extraction']
     }
     
-    # Check title against keywords
+    # Check for strong category indicators first (more specific matches)
+    strong_indicators = {
+        'Finance': ['metals company', 'stock', 'market crash', 'investment', 'financial'],
+        'Environmental Monitoring': ['swiss lakes', 'lake', 'environment', 'climate change', 'conservation', 'black swan'],
+        'Robotics': ['robotic day', 'robot', 'autonomous', 'robotics'],
+        'Pattern Recognition': ['neural network', 'computer vision', 'image recognition']
+    }
+    
+    # Check for strong indicators first
+    for category, indicators in strong_indicators.items():
+        for indicator in indicators:
+            if indicator in title_lower:
+                logging.info(f"Strong match found: '{indicator}' in '{title}' -> {category}")
+                return category
+    
+    # Count keyword matches for each category
+    match_counts = {category: 0 for category in categories}
+    
     for category, keywords in categories.items():
-        if any(keyword in title_lower for keyword in keywords):
-            return category
-            
-    # Default category if no match
+        for keyword in keywords:
+            if keyword in title_lower:
+                match_counts[category] += 1
+                logging.info(f"Keyword match: '{keyword}' in '{title}' -> {category}")
+    
+    # Get the category with the most keyword matches
+    if any(match_counts.values()):
+        best_category = max(match_counts.items(), key=lambda x: x[1])[0]
+        if match_counts[best_category] > 0:
+            logging.info(f"Category determined by keyword count: '{title}' -> {best_category}")
+            return best_category
+    
+    # Special case handling based on content analysis
+    if 'metals company' in title_lower or 'metal' in title_lower:
+        logging.info(f"Special case for metals company: '{title}' -> Finance")
+        return 'Finance'
+        
+    if 'lake' in title_lower or 'swan' in title_lower or 'environment' in title_lower:
+        logging.info(f"Special case for environmental terms: '{title}' -> Environmental Monitoring")
+        return 'Environmental Monitoring'
+    
+    # Default category is still Robotics, but with a warning
+    logging.warning(f"No category match found for: '{title}', defaulting to Robotics")
     return "Robotics"
+
+def fetch_article_content(url):
+    """Fetch the content of a Medium article for better categorization"""
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        response = requests.get(url, timeout=10, headers=headers)
+        
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            
+            # Try to get the article content
+            article_content = ""
+            
+            # Get all paragraphs in the article
+            paragraphs = soup.select('article p')
+            if paragraphs:
+                article_content = " ".join([p.get_text() for p in paragraphs])
+            
+            # If no paragraphs found, try another common selector
+            if not article_content:
+                article_sections = soup.select('section')
+                if article_sections:
+                    paragraphs = []
+                    for section in article_sections:
+                        paragraphs.extend(section.select('p'))
+                    article_content = " ".join([p.get_text() for p in paragraphs])
+            
+            return article_content.lower()
+        
+        return ""
+    except Exception as e:
+        logging.warning(f"Error fetching article content: {str(e)}")
+        return ""
+
+def determine_category_with_content(post):
+    """Determine blog category based on both post title and content if available"""
+    title = post['title']
+    
+    # First try to categorize based on title alone
+    category_from_title = determine_category(title)
+    
+    # If we got a category other than the default, return it
+    if category_from_title != "Robotics":
+        return category_from_title
+    
+    # Otherwise, try to fetch and analyze the article content
+    if 'link' in post:
+        logging.info(f"Fetching article content for better classification: {title}")
+        content = fetch_article_content(post['link'])
+        
+        if content:
+            # Define content keywords for categories
+            content_categories = {
+                'Finance': ['financial', 'investment', 'stock', 'market', 'economy', 'economic', 
+                           'trading', 'fund', 'portfolio', 'asset', 'metals', 'mining', 'capital',
+                           'revenue', 'profit', 'dividend', 'shareholder', 'nasdaq', 'nyse'],
+                
+                'Environmental Monitoring': ['environment', 'ecosystem', 'conservation', 'climate', 
+                                           'sustainable', 'pollution', 'biodiversity', 'renewable', 
+                                           'lake', 'ocean', 'forest', 'emissions', 'carbon', 'green', 
+                                           'nature', 'wildlife', 'ecological', 'water quality'],
+                
+                'Pattern Recognition': ['pattern', 'recognition', 'machine learning', 'algorithm', 
+                                      'neural network', 'classification', 'feature extraction', 
+                                      'clustering', 'computer vision', 'image processing']
+            }
+            
+            # Count keyword occurrences in content
+            content_scores = {category: 0 for category in content_categories}
+            
+            for category, keywords in content_categories.items():
+                for keyword in keywords:
+                    if keyword in content:
+                        # Count occurrences
+                        occurrences = content.count(keyword)
+                        content_scores[category] += occurrences
+                        if occurrences > 0:
+                            logging.info(f"Content match: '{keyword}' ({occurrences} times) in article -> {category}")
+            
+            # If we have significant matches in content
+            if any(score > 3 for score in content_scores.values()):
+                best_category = max(content_scores.items(), key=lambda x: x[1])[0]
+                if content_scores[best_category] > 3:
+                    logging.info(f"Category determined by content analysis: '{title}' -> {best_category}")
+                    return best_category
+    
+    # If we couldn't determine a category from content, return the title-based one
+    return category_from_title
 
 def main():
     # Set the HTML file to update
