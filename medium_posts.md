@@ -1,6 +1,6 @@
 # 📝 Latest Blog Posts from Medium
 
-*Last updated: 2025-05-30 00:53:37*
+*Last updated: 2025-05-31 00:52:48*
 
 - [Update on The Metals company](https://medium.com/@stockerjulien/update-on-the-metals-company-0d5fb49a07a7?source=rss-49dfa5a52423------2) (May 09, 2025)
 - [Black Swan Below: Hidden Military Actions Threaten Swiss Lakes’ Future](https://medium.com/@stockerjulien/menace-in-the-deep-d832fee3361b?source=rss-49dfa5a52423------2) (Dec 13, 2024)
