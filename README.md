@@ -61,3 +61,27 @@ If you need to update the blog section immediately after publishing a new Medium
 ### Customization
 
 To modify how posts are categorized, edit the `determine_category` function in `update-blog-section.py`. 
+
+What I did locally (and what you should do on every update)
+python3 update-medium.py – refreshed medium_posts.(json|md) and now contains the new post.
+python3 update-blog-section.py –
+downloaded the image from Medium and stored it as
+assets/images/blog/medium_starting_with_lerobot_imitation_learning.png
+regenerated the whole blog section inside index.html.
+Verified the file exists:
+Apply to README.md
+file
+Confirmed index.html now uses that path:
+Apply to README.md
+>
+
+After GitHub Pages finishes rebuilding (usually ~30 s) reload the site; the
+“Starting With LeRobot Imitation Learning” card will display correctly.
+How to avoid this next time
+• Never add images or edit index.html by hand.
+• Just run
+Apply to index.html
+Run
+push
+or let the scheduled GitHub Action do it for you – it already runs every
+night.

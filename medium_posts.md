@@ -1,6 +1,10 @@
 # 📝 Latest Blog Posts from Medium
 
+<<<<<<< HEAD
 *Last updated: 2025-07-15 00:59:02*
+=======
+*Last updated: 2025-07-15 22:13:07*
+>>>>>>> 3a8a6ee (Automated update: add image for LeRobot Imitation Learning post)
 
 - [Starting with LeRobot Imitation Learning](https://medium.com/@stockerjulien/starting-with-lerobot-imitation-learning-3f25eaeb18f7?source=rss-49dfa5a52423------2) (Jul 03, 2025)
 - [Update on The Metals company](https://medium.com/@stockerjulien/update-on-the-metals-company-0d5fb49a07a7?source=rss-49dfa5a52423------2) (May 09, 2025)
