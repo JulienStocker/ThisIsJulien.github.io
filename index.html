@@ -2,10 +2,31 @@
 
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Ch. Stocker</title>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Julien Stocker - Robotics Engineer | Portfolio</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Julien Stocker - Robotics Engineer specializing in mobile robotics, machine learning, and IoT. Master's graduate from EPFL with experience in soft robotics, computer vision, and autonomous systems."/>
+  <meta name="keywords" content="Robotics Engineer, Mobile Robotics, Machine Learning, IoT, EPFL, Soft Robotics, Computer Vision, ROS, Python, Julien Stocker"/>
+  <meta name="author" content="Julien Stocker"/>
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Julien Stocker - Robotics Engineer Portfolio"/>
+  <meta property="og:description" content="Robotics Engineer specializing in mobile robotics, machine learning, and IoT. Explore my projects, research, and blog posts."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://christopherjulien.github.io/"/>
+  <meta property="og:image" content="https://christopherjulien.github.io/assets/images/my-avatar.png"/>
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Julien Stocker - Robotics Engineer Portfolio"/>
+  <meta name="twitter:description" content="Robotics Engineer specializing in mobile robotics, machine learning, and IoT."/>
+  <meta name="twitter:image" content="https://christopherjulien.github.io/assets/images/my-avatar.png"/>
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://christopherjulien.github.io/"/>
 <!--
     - favicon
   -->
@@ -18,19 +39,21 @@
     - blog style fixes
   -->
 <link href="./assets/css/blog-fix.css" rel="stylesheet"/>
-<!--
+  <!--
     - google font link
   -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/></noscript>
 <!-- Include Devicon CSS -->
 <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" rel="stylesheet"/>
-<!-- EmailJS SDK -->
-<script src="https://cdn.emailjs.com/dist/email.min.js" type="text/javascript"></script>
-<script type="text/javascript">
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
     (function () {
-      emailjs.init("WVlv4uTH01UHNHpL1"); // Replace with your EmailJS user ID
+      // EmailJS public key - safe to expose as it's restricted to specific domains
+      emailjs.init("WVlv4uTH01UHNHpL1");
     })();
   </script>
 <style>
@@ -80,17 +103,17 @@
     -->
 <aside class="sidebar" data-sidebar="">
 <div class="sidebar-info">
-<figure class="avatar-box">
-<img alt="Julien Stocker" src="./assets/images/my-avatar.png" width="80"/>
+        <figure class="avatar-box">
+          <img alt="Julien Stocker" src="./assets/images/my-avatar.png" width="80" loading="eager"/>
 </figure>
 <div class="info-content">
 <h1 class="name" title="Julien Stocker">Julien Stocker</h1>
 <p class="title">Robotics Engineer</p>
 </div>
-<button class="info_more-btn" data-sidebar-btn="">
-<span>Show Contacts</span>
-<ion-icon name="chevron-down"></ion-icon>
-</button>
+        <button class="info_more-btn" data-sidebar-btn="" aria-label="Toggle contact information">
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
 </div>
 <div class="sidebar-info_more">
 <div class="separator"></div>
@@ -235,12 +258,10 @@
                 </p>
 </div>
 </li>
-<li class="service-item">
-<div class="service-icon-box">
-<!-- TODO change icon -->
-<img alt="mobile app icon" src="./assets
-
-/images/icon-app.svg" width="40"/>
+              <li class="service-item">
+                <div class="service-icon-box">
+                  <!-- TODO change icon -->
+                  <img alt="mobile app icon" src="./assets/images/icon-app.svg" width="40"/>
 </div>
 <div class="service-content-box">
 <h4 class="h4 service-item-title">Internet of Things</h4>
@@ -272,9 +293,9 @@
 <ul class="testimonials-list has-scrollbar">
 <li class="testimonials-item">
 <div class="content-card" data-testimonials-item="">
-<figure class="testimonials-avatar-box">
-<!-- TODO change icon -->
-<img alt="Katia Bertoldi" data-testimonials-avatar="" src="./assets/images/katia-pic.png" width="60"/>
+                <figure class="testimonials-avatar-box">
+                  <!-- TODO change icon -->
+                  <img alt="Katia Bertoldi" data-testimonials-avatar="" src="./assets/images/katia-pic.png" width="60" loading="lazy"/>
 </figure>
 <h4 class="h4 testimonials-item-title" data-testimonials-title="">Prof. Dr. Katia Bertoldi</h4>
 <div class="testimonials-text" data-testimonials-text="">
@@ -287,9 +308,9 @@
 </li>
 <li class="testimonials-item">
 <div class="content-card" data-testimonials-item="">
-<figure class="testimonials-avatar-box">
-<!-- TODO change icon -->
-<img alt="Anne Meeussen" data-testimonials-avatar="" src="./assets/images/anne-pic.png" width="60"/>
+                <figure class="testimonials-avatar-box">
+                  <!-- TODO change icon -->
+                  <img alt="Anne Meeussen" data-testimonials-avatar="" src="./assets/images/anne-pic.png" width="60" loading="lazy"/>
 </figure>
 <h4 class="h4 testimonials-item-title" data-testimonials-title="">Post-doc Anne Meeussen</h4>
 <div class="testimonials-text" data-testimonials-text="">
@@ -301,9 +322,9 @@
 </li>
 <li class="testimonials-item">
 <div class="content-card" data-testimonials-item="">
-<figure class="testimonials-avatar-box">
-<!-- TODO change icon -->
-<img alt="Jamie Paik" data-testimonials-avatar="" src="./assets/images/jamie-pic.png" width="60"/>
+                <figure class="testimonials-avatar-box">
+                  <!-- TODO change icon -->
+                  <img alt="Jamie Paik" data-testimonials-avatar="" src="./assets/images/jamie-pic.png" width="60" loading="lazy"/>
 </figure>
 <h4 class="h4 testimonials-item-title" data-testimonials-title="">Prof. Dr. Jamie Paik</h4>
 <div class="testimonials-text" data-testimonials-text="">
@@ -315,9 +336,9 @@
 </li>
 <li class="testimonials-item">
 <div class="content-card" data-testimonials-item="">
-<figure class="testimonials-avatar-box">
-<!-- TODO change icon -->
-<img alt="Kevin Holdcroft" data-testimonials-avatar="" src="./assets/images/kevin-pic.png" width="60"/>
+                <figure class="testimonials-avatar-box">
+                  <!-- TODO change icon -->
+                  <img alt="Kevin Holdcroft" data-testimonials-avatar="" src="./assets/images/kevin-pic.png" width="60" loading="lazy"/>
 </figure>
 <h4 class="h4 testimonials-item-title" data-testimonials-title="">Post-doc Kevin Holdcroft</h4>
 <div class="testimonials-text" data-testimonials-text="">
@@ -335,9 +356,9 @@
 <div class="modal-container" modal-container="">
 <div class="overlay" data-overlay=""></div>
 <section class="testimonials-modal">
-<button class="modal-close-btn" data-modal-close-btn="">
-<ion-icon name="close-outline"></ion-icon>
-</button>
+          <button class="modal-close-btn" data-modal-close-btn="" aria-label="Close modal">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
 <div class="modal-img-wrapper">
 <figure class="modal-avatar-box">
 <img alt="Katia Bertoldi" data-modal-img="" src="./assets/images/avatar-1.png" width="80"/>
@@ -365,37 +386,32 @@
 <section class="clients">
 <h3 class="h3 clients-title">Laboratory and Work Experiences</h3>
 <ul class="clients-list has-scrollbar">
-<li class="clients-item">
-<a href="https://seas.harvard.edu/person/katia-bertoldi">
-<img alt="client logo" class="client-logo" src="./assets/images/edu-2.png" style="max-width: 100%; height: auto; margin-top: 5px;"/>
+            <li class="clients-item">
+              <a href="https://seas.harvard.edu/person/katia-bertoldi">
+                <img alt="client logo" class="client-logo" src="./assets/images/edu-2.png" style="max-width: 100%; height: auto; margin-top: 5px;" loading="lazy"/>
 </a>
 </li>
-<li class="clients-item">
-<a href="https://www.epfl.ch/labs/rrl/">
-<img alt="client logo" class="client-logo" src="./assets/images/edu-1.png" style="max-width: 100%; height: auto; margin-top: 5px;"/>
+            <li class="clients-item">
+              <a href="https://www.epfl.ch/labs/rrl/">
+                <img alt="client logo" class="client-logo" src="./assets/images/edu-1.png" style="max-width: 100%; height: auto; margin-top: 5px;" loading="lazy"/>
 </a>
 </li>
-<li class="clients-item">
-<a href="https://www.witty-machines.com">
-<img alt="client logo" class="client-logo" src="./assets/images/blue.svg" style="max-width: 100%; height: auto; margin-top: 5px;"/>
+            <li class="clients-item">
+              <a href="https://www.witty-machines.com">
+                <img alt="client logo" class="client-logo" src="./assets/images/blue.svg" style="max-width: 100%; height: auto; margin-top: 5px;" loading="lazy"/>
 </a>
 </li>
-<li class="clients-item">
-<a href="https://riverclean.ethz.ch">
-<img alt="client logo" class="client-logo" src="./assets/images/edu-3.png" style="max-width: 70%; height: auto; margin-top: 5px;"/>
+            <li class="clients-item">
+              <a href="https://riverclean.ethz.ch">
+                <img alt="client logo" class="client-logo" src="./assets/images/edu-3.png" style="max-width: 70%; height: auto; margin-top: 5px;" loading="lazy"/>
 </a>
 </li>
-<li class="clients-item">
-<a href="https://artsandculture.google.com/story/pathos-by-pors-amp-rao/4wVB9hk1dQ16zw?hl=en">
-<img alt="client logo" class="client-logo" src="./assets/images/edu-pr.png" style="max-width: 100%; height: auto; margin-top: 5px;"/>
-</a>
-</li>
-<!-- <li class="clients-item">
-              <a href="https://www.epfl.ch/campus/associations/list/hola/">
-                <img src="./assets/images/edu-hola1.png" alt="client logo" class="client-logo" style="max-width: 100%; height: auto;">
+            <li class="clients-item">
+              <a href="https://artsandculture.google.com/story/pathos-by-pors-amp-rao/4wVB9hk1dQ16zw?hl=en">
+                <img alt="client logo" class="client-logo" src="./assets/images/edu-pr.png" style="max-width: 100%; height: auto; margin-top: 5px;" loading="lazy"/>
               </a>
-            </li> -->
-</ul>
+            </li>
+          </ul>
 </section>
 </article>
 <!-- #RESUME -->
@@ -579,109 +595,94 @@
 <h3 class="h3">Developing Tools</h3>
 </div>
 <ul class="tools-list has-scrollbar">
-<li class="clients-item">
-<a href="https://www.arduino.cc/">
-<img alt="Arduino logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" style="width: 60px; height: auto;"/>
+            <li class="clients-item">
+              <a href="https://www.arduino.cc/">
+                <img alt="Arduino logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://www.anaconda.com/">
+                <img alt="Anaconda logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://www.docker.com/">
+                <img alt="Docker logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg" style="width: 60px; height: auto;" loading="lazy"/>
 </a>
 </li>
-<!-- <li class="clients-item">
-              <a href="https://developer.android.com/studio">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg"
-                  alt="Android Studio logo" style="width: 60px; height:  </a>
-            </li> -->
-<li class="clients-item">
-<a href="https://www.anaconda.com/">
-<img alt="Anaconda logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/anaconda/anaconda-original.svg" style="width: 60px; height: auto;"/>
+            <li class="clients-item">
+              <a href="https://firebase.google.com/">
+                <img alt="Firebase logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" style="width: 60px; height: auto;" loading="lazy"/>
 </a>
 </li>
-<!-- <li class="clients-item">
-              <a href="https://www.postgresql.org/">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
-                  alt="SQL logo" style="width: 60px; height:  </a>
-            </li> -->
-<li class="clients-item">
-<a href="https://www.docker.com/">
-<img alt="Docker logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://firebase.google.com/">
-<img alt="Firebase logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="http://gazebosim.org/">
-<img alt="Gazebo logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gazebo/gazebo-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://git-scm.com/">
-<img alt="Git logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://github.com/" style="color: white;">
-<i class="devicon-github-original" style="font-size: 60px;"></i>
-</a>
-</li>
-<!-- <li class="clients-item">
-              <a href="https://gitlab.com/">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg"
-                  alt="GitLab logo" style="width: 60px; height:  </a>
-            </li> -->
-<li class="clients-item">
-<a href="https://jupyter.org/">
-<img alt="Jupyter logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://www.linux.org/">
-<img alt="Linux logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://matplotlib.org/">
-<img alt="Matplotlib logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://numpy.org/">
-<img alt="NumPy logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://pandas.pydata.org/">
-<img alt="Pandas logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://opencv.org/">
-<img alt="OpenCV logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://pytorch.org/">
-<img alt="PyTorch logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://www.raspberrypi.org/">
-<img alt="Raspberry Pi logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://www.ros.org/">
-<img alt="ROS logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ros/ros-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://www.tensorflow.org/">
-<img alt="TensorFlow logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" style="width: 60px; height: auto;"/>
-</a>
-</li>
-<li class="clients-item">
-<a href="https://www.latex-project.org/">
-<img alt="LaTeX logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/latex/latex-original.svg" style="width: 60px; height: auto;"/>
+            <li class="clients-item">
+              <a href="http://gazebosim.org/">
+                <img alt="Gazebo logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gazebo/gazebo-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://git-scm.com/">
+                <img alt="Git logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://github.com/" style="color: white;">
+                <i class="devicon-github-original" style="font-size: 60px;" aria-label="GitHub"></i>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://jupyter.org/">
+                <img alt="Jupyter logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://www.linux.org/">
+                <img alt="Linux logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://matplotlib.org/">
+                <img alt="Matplotlib logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matplotlib/matplotlib-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://numpy.org/">
+                <img alt="NumPy logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://pandas.pydata.org/">
+                <img alt="Pandas logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://opencv.org/">
+                <img alt="OpenCV logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://pytorch.org/">
+                <img alt="PyTorch logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://www.raspberrypi.org/">
+                <img alt="Raspberry Pi logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://www.ros.org/">
+                <img alt="ROS logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ros/ros-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://www.tensorflow.org/">
+                <img alt="TensorFlow logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://www.latex-project.org/">
+                <img alt="LaTeX logo" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/latex/latex-original.svg" style="width: 60px; height: auto;" loading="lazy"/>
 </a>
 </li>
 </ul>
@@ -760,13 +761,13 @@
 <button data-filter-btn="">Robotic Art</button>
 </li>
 </ul>
-<div class="filter-select-box">
-<button class="filter-select" data-select="">
-<div class="select-value" data-selecct-value="">Select category</div>
-<div class="select-icon">
-<ion-icon name="chevron-down"></ion-icon>
-</div>
-</button>
+        <div class="filter-select-box">
+          <button class="filter-select" data-select="" aria-label="Filter projects by category">
+            <div class="select-value" data-selecct-value="">Select category</div>
+            <div class="select-icon">
+              <ion-icon name="chevron-down"></ion-icon>
+            </div>
+          </button>
 <ul class="select-list">
 <li class="select-item">
 <button data-select-item="">All</button>
@@ -792,8 +793,8 @@
 </ul>
 </div>
 <ul class="project-list">
-<li class="project-item active" data-category="sof robotics" data-filter-item="">
-<a href="./assets/papers/BRIDGE_PoC_SPONDYLUS_final.pdf" target="_blank">
+            <li class="project-item active" data-category="soft robotics" data-filter-item="">
+              <a href="./assets/papers/BRIDGE_PoC_SPONDYLUS_final.pdf" target="_blank">
 <figure class="project-banner-box">
 <img alt="proj-spondylus" loading="lazy" src="./assets/images/proj-spondylus.png"/>
 </figure>
@@ -990,60 +991,8 @@
 </div>
 </div>
 </a>
-</li>
-<!-- ARC Docker - Isaac Gym -->
-<!-- <li class="project-item active" data-filter-item data-category="mobile robotics">
-              <a href="https://github.com/ChristopherJulien/ARC-Docker" target="_blank">
-                <figure class="project-banner-box">
-                  <img src="./assets/images/proj-arc.png" alt="Isaac Gym" loading="lazy">
-                </figure>
-                <div class="project-content">
-                  <h3 class="h3 project-item-title">ARC-Docker</h3>
-                  <p class="project-text">IsaacGymEnvs Learning Pipeline</p>
-                  <div class="project-meta">
-                    <p class="project-category">Robot Simulation</p>
-                    <span class="dot"></span>
-                    <time datetime="2025-01-07">2025</time>
-                  </div>
-                </div>
-              </a>
-            </li> -->
-<!-- Smart Mirror -->
-<!-- <li class="project-item active" data-filter-item data-category="internet of things">
-              <a href="https://github.com/ChristopherJulien/SmartMirror" target="_blank">
-                <figure class="project-banner-box">
-                  <img src="./assets/images/proj-mirror.png" alt="Smart Mirror" loading="lazy">
-                </figure>
-                <div class="project-content">
-                  <h3 class="h3 project-item-title">Smart Mirror</h3>
-                  <p class="project-text">Interactive Smart Mirror Interface</p>
-                  <div class="project-meta">
-                    <p class="project-category">IoT & JavaScript</p>
-                    <span class="dot"></span>
-                    <time datetime="2025-03-16">2025</time>
-                  </div>
-                </div>
-              </a>
-            </li> -->
-<!-- Combined Environment Control Interface -->
-<!-- <li class="project-item active" data-filter-item data-category="internet of things">
-              <a href="https://github.com/ChristopherJulien/Combined-Environment-Control-Interface" target="_blank">
-                <figure class="project-banner-box">
-                  <img src="./assets/images/proj-ceci.png" alt="Environment Control" loading="lazy">
-                </figure>
-                <div class="project-content">
-                  <h3 class="h3 project-item-title">Environment Control Interface</h3>
-                  <p class="project-text">Combined Environment Control System</p>
-                  <div class="project-meta">
-                    <p class="project-category">Automation & Python</p>
-                    <span class="dot"></span>
-                    <time datetime="2024-09-25">2024</time>
-                  </div>
-                </div>
-              </a>
             </li>
-          </ul> -->
-<li class="project-item active" data-category="robotic art" data-filter-item="">
+            <li class="project-item active" data-category="robotic art" data-filter-item="">
 <a href="https://artsandculture.google.com/story/pathos-by-pors-amp-rao/4wVB9hk1dQ16zw?hl=en" target="_blank">
 <figure class="project-banner-box">
 <img alt="Pors &amp; Rao" loading="lazy" src="./assets/images/porsandrao.png"/>
@@ -1098,23 +1047,29 @@
 <header>
 <h2 class="h2 article-title">Contact</h2>
 </header>
-<section class="mapbox" data-mapbox="">
-<figure>
-<iframe height="300" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d87046.92434740755!2d8.188058040609446!3d47.01635744844437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478ffac7183f1bab%3A0xbf058e98f516f015!2sKriens!5e0!3m2!1sen!2sch!4v1677778479357!5m2!1sen!2sch" width="400"></iframe>
-</figure>
-</section>
+          <section class="mapbox" data-mapbox="">
+            <figure>
+              <iframe height="300" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d87046.92434740755!2d8.188058040609446!3d47.01635744844437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478ffac7183f1bab%3A0xbf058e98f516f015!2sKriens!5e0!3m2!1sen!2sch!4v1677778479357!5m2!1sen!2sch" width="400" title="Location map of Luzern, Switzerland" aria-label="Google Maps showing Luzern, Switzerland"></iframe>
+            </figure>
+          </section>
 <section class="contact-form">
 <h3 class="h3 form-title">Contact Form</h3>
 <form class="form" data-form="" id="contact-form">
 <div class="input-wrapper">
-<input class="form-input" data-form-input="" name="fullname" placeholder="Full name" required="" type="text"/>
-<input class="form-input" data-form-input="" name="email" placeholder="Email address" required="" type="email"/>
+            <input class="form-input" data-form-input="" name="fullname" placeholder="Full name" required="" type="text" aria-label="Full name"/>
+            <input class="form-input" data-form-input="" name="email" placeholder="Email address" required="" type="email" aria-label="Email address"/>
 </div>
-<textarea class="form-input" data-form-input="" name="message" placeholder="Your Message" required=""></textarea>
-<button class="form-btn" type="submit">
-<ion-icon name="paper-plane"></ion-icon>
-<span>Send Message</span>
-</button>
+            <textarea class="form-input" data-form-input="" name="message" placeholder="Your Message" required="" aria-label="Your message"></textarea>
+            <button class="form-btn" type="submit" aria-label="Send message">
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+            <noscript>
+              <p style="color: var(--orange-yellow-crayola); margin-top: 10px;">
+                JavaScript is required for the contact form. Please enable JavaScript or email me directly at 
+                <a href="mailto:stockerjulien@gmail.com" style="color: var(--orange-yellow-crayola);">stockerjulien@gmail.com</a>
+              </p>
+            </noscript>
 </form>
 </section>
 </article>
@@ -1129,14 +1084,22 @@
   -->
 <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
 <script nomodule="" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script>
+  <script>
     document.getElementById('contact-form').addEventListener('submit', function (event) {
-      event.preventDefault(); // Prevent the default form submission
+      event.preventDefault();
+
+      const form = event.target;
+      const submitButton = form.querySelector('.form-btn');
+      const originalButtonContent = submitButton.innerHTML;
+      
+      // Disable button and show loading state
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Sending...</span>';
 
       // Get form values
-      const fullname = event.target.fullname.value;
-      const email = event.target.email.value;
-      const message = event.target.message.value;
+      const fullname = form.fullname.value;
+      const email = form.email.value;
+      const message = form.message.value;
 
       // Send email using EmailJS
       emailjs.send("service_qpk2a14", "template_fa11gyb", {
@@ -1144,9 +1107,38 @@
         from_email: email,
         message: message
       }).then(function (response) {
-        alert('Message sent successfully!');
+        // Success
+        submitButton.innerHTML = '<ion-icon name="checkmark-circle-outline"></ion-icon><span>Sent!</span>';
+        form.reset();
+        
+        // Show success message
+        const successMsg = document.createElement('div');
+        successMsg.style.cssText = 'margin-top: 15px; padding: 12px; background: rgba(45, 212, 191, 0.1); border: 1px solid #2dd4bf; border-radius: 8px; color: #2dd4bf; text-align: center;';
+        successMsg.textContent = 'Thank you! Your message has been sent successfully.';
+        form.appendChild(successMsg);
+        
+        // Reset button after 3 seconds
+        setTimeout(function() {
+          submitButton.innerHTML = originalButtonContent;
+          submitButton.disabled = false;
+          if (successMsg.parentNode) successMsg.remove();
+        }, 3000);
       }, function (error) {
-        alert('Failed to send the message. Please try again later.');
+        // Error
+        submitButton.innerHTML = originalButtonContent;
+        submitButton.disabled = false;
+        
+        // Show error message
+        const errorMsg = document.createElement('div');
+        errorMsg.style.cssText = 'margin-top: 15px; padding: 12px; background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 8px; color: #ef4444; text-align: center;';
+        errorMsg.textContent = 'Failed to send message. Please try again or email me directly at stockerjulien@gmail.com';
+        form.appendChild(errorMsg);
+        
+        setTimeout(function() {
+          if (errorMsg.parentNode) errorMsg.remove();
+        }, 5000);
+        
+        console.error('EmailJS Error:', error);
       });
     });
   </script>
